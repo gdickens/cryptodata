@@ -19,12 +19,14 @@ The Bitcoin Boom:
 
 Cryptocurrency Correlation:
 ========================================================
-In September 2017 SEMrush, a search engine marketing agency, reported that the price of bitcoin was strongly correlated with the volume of Google search requests on the word "Bitcoin".
+The price of bitcoin is said to be correlated with the volume of Google search requests:
 
-The findings, while not suprising, are interesting and may have implications for proxying the extent of investment that might be driven by 'irrational exuberance', rather than genuine changes in the virtual currency's value. 
+![plot of chunk unnamed-chunk-1](Pitch presentation-figure/unnamed-chunk-1-1.png)
  
 The Mission:
 ========================================================
+The findings, while not suprising, are interesting and may have implications for proxying the extent of investment that might be driven by 'irrational exuberance', rather than genuine changes in the virtual currency's value. 
+
 As a mechanism to explore this idea further, the "cryptodata" dashboard provides a simplified interface for comparing a cryptocurrency's market price with Google search volume data.  
 
 This web application achieves this by asking the user to select a Cryptocurrency from a list of the top 100 and querying data from Google trends and Coinmarketcap.com and providing simple plots to illustrate the relationship of search volume and price. 

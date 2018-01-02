@@ -19,12 +19,34 @@ The Bitcoin Boom:
 
 Cryptocurrency Correlation:
 ========================================================
-In September 2017 SEMrush, a search engine marketing agency, reported that the price of bitcoin was strongly correlated with the volume of Google search requests on the word "Bitcoin".
+The price of bitcoin is said to be correlated with the volume of Google search requests:
 
-The findings, while not suprising, are interesting and may have implications for proxying the extent of investment that might be driven by 'irrational exuberance', rather than genuine changes in the virtual currency's value. 
+```{r,echo=FALSE}
+library(gtrendsR)
+library(rvest)
+
+url <-read_html("https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20171001&end=20171229")
+
+        Bitcoin <- url %>%
+            html_table() %>%
+            as.data.frame()
+Bitcoin$Date<-as.POSIXct(Bitcoin$Date, format="%b %d, %Y")
+Bitcoin$Date_ch<-format(Bitcoin$Date, "%Y-%m-%d")
+
+Bitcoin_trend<-gtrends("Bitcoin",time="2017-10-01 2017-12-29")
+Bitcoin_trend_hits<-Bitcoin_trend$interest_over_time
+Bitcoin_trend_hits$Date_ch<-format(Bitcoin_trend_hits$date, "%Y-%m-%d")
+
+Bitcoin<-merge(Bitcoin,Bitcoin_trend_hits,by="Date_ch")
+
+plot(Bitcoin$hits,Bitcoin$Close, ylab="Bitcoin Price (USD)",xlab = "Google search volume", main="Search Volume vs. Bitcoin Price")
+
+```
  
 The Mission:
 ========================================================
+The findings, while not suprising, are interesting and may have implications for proxying the extent of investment that might be driven by 'irrational exuberance', rather than genuine changes in the virtual currency's value. 
+
 As a mechanism to explore this idea further, the "cryptodata" dashboard provides a simplified interface for comparing a cryptocurrency's market price with Google search volume data.  
 
 This web application achieves this by asking the user to select a Cryptocurrency from a list of the top 100 and querying data from Google trends and Coinmarketcap.com and providing simple plots to illustrate the relationship of search volume and price. 
